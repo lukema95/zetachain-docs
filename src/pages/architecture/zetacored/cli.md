@@ -33,13 +33,13 @@ Zetacore Daemon (server)
 * [zetacored parse-genesis-file](#zetacored-parse-genesis-file)	 - Parse the provided genesis file and import the required data into the optionally provided genesis file
 * [zetacored query](#zetacored-query)	 - Querying subcommands
 * [zetacored rollback](#zetacored-rollback)	 - rollback cosmos-sdk and tendermint state by one height
-* [zetacored rosetta](#zetacored-rosetta)	 - spin up a rosetta server
 * [zetacored snapshots](#zetacored-snapshots)	 - Manage local snapshots
 * [zetacored start](#zetacored-start)	 - Run the full node
 * [zetacored status](#zetacored-status)	 - Query remote node for status
 * [zetacored tendermint](#zetacored-tendermint)	 - Tendermint subcommands
 * [zetacored testnet](#zetacored-testnet)	 - subcommands for starting or configuring local testnets
 * [zetacored tx](#zetacored-tx)	 - Transactions subcommands
+* [zetacored upgrade-handler-version](#zetacored-upgrade-handler-version)	 - Print the default upgrade handler version
 * [zetacored validate-genesis](#zetacored-validate-genesis)	 - validates the genesis file at the default location or at the location passed as an arg
 * [zetacored version](#zetacored-version)	 - Print the application binary version information
 
@@ -5376,6 +5376,7 @@ zetacored query observer [flags]
 * [zetacored query](#zetacored-query)	 - Querying subcommands
 * [zetacored query observer get-historical-tss-address](#zetacored-query-observer-get-historical-tss-address)	 - Query tss address by finalized zeta height (for historical tss addresses)
 * [zetacored query observer get-tss-address](#zetacored-query-observer-get-tss-address)	 - Query current tss address
+* [zetacored query observer list-ballots](#zetacored-query-observer-list-ballots)	 - Query all ballots
 * [zetacored query observer list-blame](#zetacored-query-observer-list-blame)	 - Query AllBlameRecords
 * [zetacored query observer list-blame-by-msg](#zetacored-query-observer-list-blame-by-msg)	 - Query AllBlameRecords
 * [zetacored query observer list-chain-nonces](#zetacored-query-observer-list-chain-nonces)	 - list all chainNonces
@@ -5394,6 +5395,7 @@ zetacored query observer [flags]
 * [zetacored query observer show-keygen](#zetacored-query-observer-show-keygen)	 - shows keygen
 * [zetacored query observer show-node-account](#zetacored-query-observer-show-node-account)	 - shows a NodeAccount
 * [zetacored query observer show-observer-count](#zetacored-query-observer-show-observer-count)	 - Query show-observer-count
+* [zetacored query observer show-operational-flags](#zetacored-query-observer-show-operational-flags)	 - shows the operational flags
 * [zetacored query observer show-tss](#zetacored-query-observer-show-tss)	 - shows a TSS
 * [zetacored query observer show-tss-funds-migrator](#zetacored-query-observer-show-tss-funds-migrator)	 - show the tss funds migrator for a chain
 
@@ -5446,6 +5448,40 @@ zetacored query observer get-tss-address [bitcoinChainId]] [flags]
       --grpc-insecure      allow gRPC over insecure channels, if not TLS the server must use TLS
       --height int         Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help               help for get-tss-address
+      --node string        [host]:[port] to Tendermint RPC interface for this chain 
+  -o, --output string      Output format (text|json) 
+```
+
+### Options inherited from parent commands
+
+```
+      --chain-id string     The network chain ID
+      --home string         directory for config and data 
+      --log_format string   The logging format (json|plain) 
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
+      --log_no_color        Disable colored logs
+      --trace               print out full stack trace on errors
+```
+
+### SEE ALSO
+
+* [zetacored query observer](#zetacored-query-observer)	 - Querying commands for the observer module
+
+## zetacored query observer list-ballots
+
+Query all ballots
+
+```
+zetacored query observer list-ballots [flags]
+```
+
+### Options
+
+```
+      --grpc-addr string   the gRPC endpoint to use for this chain
+      --grpc-insecure      allow gRPC over insecure channels, if not TLS the server must use TLS
+      --height int         Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help               help for list-ballots
       --node string        [host]:[port] to Tendermint RPC interface for this chain 
   -o, --output string      Output format (text|json) 
 ```
@@ -6082,6 +6118,40 @@ zetacored query observer show-observer-count [flags]
       --grpc-insecure      allow gRPC over insecure channels, if not TLS the server must use TLS
       --height int         Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help               help for show-observer-count
+      --node string        [host]:[port] to Tendermint RPC interface for this chain 
+  -o, --output string      Output format (text|json) 
+```
+
+### Options inherited from parent commands
+
+```
+      --chain-id string     The network chain ID
+      --home string         directory for config and data 
+      --log_format string   The logging format (json|plain) 
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
+      --log_no_color        Disable colored logs
+      --trace               print out full stack trace on errors
+```
+
+### SEE ALSO
+
+* [zetacored query observer](#zetacored-query-observer)	 - Querying commands for the observer module
+
+## zetacored query observer show-operational-flags
+
+shows the operational flags
+
+```
+zetacored query observer show-operational-flags [flags]
+```
+
+### Options
+
+```
+      --grpc-addr string   the gRPC endpoint to use for this chain
+      --grpc-insecure      allow gRPC over insecure channels, if not TLS the server must use TLS
+      --height int         Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help               help for show-operational-flags
       --node string        [host]:[port] to Tendermint RPC interface for this chain 
   -o, --output string      Output format (text|json) 
 ```
@@ -7353,45 +7423,6 @@ zetacored rollback [flags]
 ### Options inherited from parent commands
 
 ```
-      --log_format string   The logging format (json|plain) 
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
-      --log_no_color        Disable colored logs
-      --trace               print out full stack trace on errors
-```
-
-### SEE ALSO
-
-* [zetacored](#zetacored)	 - Zetacore Daemon (server)
-
-## zetacored rosetta
-
-spin up a rosetta server
-
-```
-zetacored rosetta [flags]
-```
-
-### Options
-
-```
-      --addr string                the address rosetta will bind to 
-      --blockchain string          the blockchain type 
-      --denom-to-suggest string    default denom for fee suggestion 
-      --enable-fee-suggestion      enable default fee suggestion
-      --gas-to-suggest int         default gas for fee suggestion (default 200000)
-      --grpc string                the app gRPC endpoint 
-  -h, --help                       help for rosetta
-      --network string             the network name 
-      --offline                    run rosetta only with construction API
-      --prices-to-suggest string   default prices for fee suggestion 
-      --retries int                the number of retries that will be done before quitting (default 5)
-      --tendermint string          the tendermint rpc endpoint, without tcp:// 
-```
-
-### Options inherited from parent commands
-
-```
-      --home string         directory for config and data 
       --log_format string   The logging format (json|plain) 
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
       --log_no_color        Disable colored logs
@@ -9547,7 +9578,7 @@ zetacored tx crosschain vote-outbound [sendHash] [outboundHash] [outBlockHeight]
 Add a new erc20 token to whitelist
 
 ```
-zetacored tx crosschain whitelist-erc20 [erc20Address] [chainID] [name] [symbol] [decimals] [gasLimit] [flags]
+zetacored tx crosschain whitelist-erc20 [erc20Address] [chainID] [name] [symbol] [decimals] [gasLimit] [liquidityCap] [flags]
 ```
 
 ### Options
@@ -10223,7 +10254,7 @@ zetacored tx fungible [flags]
 Broadcast message DeployFungibleCoinZRC20
 
 ```
-zetacored tx fungible deploy-fungible-coin-zrc-4 [erc-20] [foreign-chain] [decimals] [name] [symbol] [coin-type] [gas-limit] [flags]
+zetacored tx fungible deploy-fungible-coin-zrc-4 [erc-20] [foreign-chain] [decimals] [name] [symbol] [coin-type] [gas-limit] [liquidity-cap] [flags]
 ```
 
 ### Options
@@ -12806,6 +12837,7 @@ zetacored tx observer [flags]
 * [zetacored tx observer update-gas-price-increase-flags](#zetacored-tx-observer-update-gas-price-increase-flags)	 - Update the gas price increase flags
 * [zetacored tx observer update-keygen](#zetacored-tx-observer-update-keygen)	 - command to update the keygen block via a group proposal
 * [zetacored tx observer update-observer](#zetacored-tx-observer-update-observer)	 - Broadcast message add-observer
+* [zetacored tx observer update-operational-flags](#zetacored-tx-observer-update-operational-flags)	 - Broadcast message UpdateOperationalFlags
 * [zetacored tx observer vote-blame](#zetacored-tx-observer-vote-blame)	 - Broadcast message vote-blame
 * [zetacored tx observer vote-tss](#zetacored-tx-observer-vote-tss)	 - Vote for a new TSS creation
 
@@ -13323,6 +13355,62 @@ zetacored tx observer update-observer [old-observer-address] [new-observer-addre
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --tip string               Tip is the amount that is going to be transferred to the fee payer on the target chain. This flag is only valid when used with --aux, and is ignored if the target chain didn't enable the TipDecorator
   -y, --yes                      Skip tx broadcasting prompt confirmation
+```
+
+### Options inherited from parent commands
+
+```
+      --home string         directory for config and data 
+      --log_format string   The logging format (json|plain) 
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
+      --log_no_color        Disable colored logs
+      --trace               print out full stack trace on errors
+```
+
+### SEE ALSO
+
+* [zetacored tx observer](#zetacored-tx-observer)	 - observer transactions subcommands
+
+## zetacored tx observer update-operational-flags
+
+Broadcast message UpdateOperationalFlags
+
+```
+zetacored tx observer update-operational-flags [flags]
+```
+
+### Options
+
+```
+  -a, --account-number uint                 The account number of the signing account (offline mode only)
+      --aux                                 Generate aux signer data instead of sending a tx
+  -b, --broadcast-mode string               Transaction broadcasting mode (sync|async) 
+      --chain-id string                     The network chain ID
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-granter string                  Fee granter grants fees for the transaction
+      --fee-payer string                    Fee payer pays fees for the transaction instead of deducting from the signer
+      --fees string                         Fees to pay along with transaction; eg: 10uatom
+      --file string                         Path to a JSON file containing OperationalFlags
+      --from string                         Name or address of private key with which to sign
+      --gas string                          gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically. Note: "auto" option doesn't always report accurate results. Set a valid coin value to adjust the result. Can be used instead of "fees". (default 200000)
+      --gas-adjustment float                adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase only accessed when providing a key name)
+  -h, --help                                help for update-operational-flags
+      --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) 
+      --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                              Use a connected Ledger device
+      --node string                         [host]:[port] to tendermint rpc interface for this chain 
+      --note string                         Note to add a description to the transaction (previously --memo)
+      --offline                             Offline mode (does not allow any online functionality)
+  -o, --output string                       Output format (text|json) 
+      --restart-height int                  Height for a coordinated zetaclient restart
+  -s, --sequence uint                       The sequence number of the signing account (offline mode only)
+      --sign-mode string                    Choose sign mode (direct|amino-json|direct-aux), this is an advanced feature
+      --signer-block-time-offset duration   Offset from the zetacore block time to initiate signing
+      --timeout-height uint                 Set a block timeout height to prevent the tx from being committed past a certain height
+      --tip string                          Tip is the amount that is going to be transferred to the fee payer on the target chain. This flag is only valid when used with --aux, and is ignored if the target chain didn't enable the TipDecorator
+  -y, --yes                                 Skip tx broadcasting prompt confirmation
 ```
 
 ### Options inherited from parent commands
@@ -14385,6 +14473,34 @@ zetacored tx vesting create-vesting-account [to_address] [amount] [end_time] [fl
 ### SEE ALSO
 
 * [zetacored tx vesting](#zetacored-tx-vesting)	 - Vesting transaction subcommands
+
+## zetacored upgrade-handler-version
+
+Print the default upgrade handler version
+
+```
+zetacored upgrade-handler-version [flags]
+```
+
+### Options
+
+```
+  -h, --help   help for upgrade-handler-version
+```
+
+### Options inherited from parent commands
+
+```
+      --home string         directory for config and data 
+      --log_format string   The logging format (json|plain) 
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) 
+      --log_no_color        Disable colored logs
+      --trace               print out full stack trace on errors
+```
+
+### SEE ALSO
+
+* [zetacored](#zetacored)	 - Zetacore Daemon (server)
 
 ## zetacored validate-genesis
 

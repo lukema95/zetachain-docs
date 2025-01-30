@@ -63,6 +63,7 @@ message MsgVoteGasPrice {
 	uint64 price = 3;
 	uint64 priority_fee = 6;
 	uint64 block_number = 4;
+	string supply = 5;
 }
 ```
 
@@ -190,6 +191,8 @@ message MsgVoteInbound {
 	ProtocolContractVersion protocol_contract_version = 16;
 	RevertOptions revert_options = 17;
 	CallOptions call_options = 18;
+	bool is_cross_chain_call = 19;
+	InboundStatus status = 20;
 }
 ```
 
@@ -209,6 +212,7 @@ message MsgWhitelistERC20 {
 	string symbol = 5;
 	uint32 decimals = 6;
 	int64 gas_limit = 7;
+	string liquidity_cap = 8;
 }
 ```
 
